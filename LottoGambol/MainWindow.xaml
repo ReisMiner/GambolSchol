@@ -1,0 +1,46 @@
+﻿<Window x:Class="LottoGambol.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LottoGambol"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="230" Width="380" ResizeMode="CanMinimize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="30" /> <!--labels -->
+            <RowDefinition Height="0" />
+            <RowDefinition Height="20" /> <!--inputs -->
+            <RowDefinition Height="10" />
+            <RowDefinition Height="30" /> <!--labels 2 -->
+            <RowDefinition Height="0" />
+            <RowDefinition Height="20" /> <!--output -->
+            <RowDefinition Height="20" />
+            <RowDefinition Height="30" /> <!-- btn -->
+            <RowDefinition Height="20" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="Auto" /> <!-- amount -->
+            <ColumnDefinition Width="30" />
+            <ColumnDefinition Width="Auto" /> <!-- min -->
+            <ColumnDefinition Width="30" />
+            <ColumnDefinition Width="Auto" /> <!-- max -->
+            <ColumnDefinition Width="20" />
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="1" Grid.Column="1" Content="Amount of Numbas" />
+        <Label Grid.Row="1" Grid.Column="3" Content="Min. Numba" />
+        <Label Grid.Row="1" Grid.Column="5" Content="Max. Numba" />
+
+        <TextBox Grid.Row="3" Grid.Column="1" VerticalContentAlignment="Center" x:Name="Amount"></TextBox>
+        <TextBox Grid.Row="3" Grid.Column="3" VerticalContentAlignment="Center" x:Name="Min"></TextBox>
+        <TextBox Grid.Row="3" Grid.Column="5" VerticalContentAlignment="Center" x:Name="Max"></TextBox>
+
+        <Label Grid.Row="5" Grid.Column="1" Content="Results" />
+        <TextBox Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="4" MaxWidth="250" VerticalContentAlignment="Center" x:Name="Res" IsReadOnly="True"></TextBox>
+        <Button Grid.Row="7" Grid.Column="5" Margin="30 0 0 0" Click="Copy_OnClick">Copy</Button>
+
+        <Button Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="5" Click="ButtonBase_OnClick">Generate Numbas</Button>
+    </Grid>
+</Window>

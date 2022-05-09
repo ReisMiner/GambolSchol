@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LottoGambol", "LottoGambol\LottoGambol.csproj", "{6132943C-53C9-4FC1-B2BF-0623DE7E1252}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{7EF292B0-5DE8-462A-B602-E76DDED631B5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6132943C-53C9-4FC1-B2BF-0623DE7E1252}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6132943C-53C9-4FC1-B2BF-0623DE7E1252}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6132943C-53C9-4FC1-B2BF-0623DE7E1252}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6132943C-53C9-4FC1-B2BF-0623DE7E1252}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EF292B0-5DE8-462A-B602-E76DDED631B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EF292B0-5DE8-462A-B602-E76DDED631B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EF292B0-5DE8-462A-B602-E76DDED631B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EF292B0-5DE8-462A-B602-E76DDED631B5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
