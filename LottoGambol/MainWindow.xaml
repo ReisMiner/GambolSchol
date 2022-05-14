@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LottoGambol"
         mc:Ignorable="d"
-        Title="MainWindow" Height="230" Width="380" ResizeMode="CanMinimize">
+        Title="LottoGambol" Height="230" Width="380" ResizeMode="CanMinimize" Closing="MainWindow_OnClosing">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20" />

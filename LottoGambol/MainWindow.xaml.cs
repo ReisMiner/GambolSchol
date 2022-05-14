@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
@@ -22,13 +23,15 @@ namespace LottoGambol
     /// </summary>
     public partial class MainWindow : Window
     {
-        private int _threadAmount = 16;
+        private int _threadAmount = 1;
 
         private Random _random = new();
-        private bool _allThreadRunning = false;
+        private bool _stillRunningThread = false;
 
         private string _output = "";
-        private bool[] _running;
+        public bool[] Running { get; }
+
+        private LoadingPopup _popup;
 
         public string Output
         {
@@ -42,7 +45,8 @@ namespace LottoGambol
 
         public MainWindow()
         {
-            _running = new bool[_threadAmount + 1];
+            _popup = new LoadingPopup();
+            Running = new bool[_threadAmount + 1];
             InitializeComponent();
         }
 
@@ -50,7 +54,7 @@ namespace LottoGambol
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
             for (int i = 0; i < _threadAmount; i++)
-                _running[i] = false;
+                Running[i] = false;
             Output = "";
             int max, min, amount;
 
@@ -88,13 +92,15 @@ namespace LottoGambol
 
             #endregion
 
+
+            /* NOT WORKING YET
             int tAmount = amount % _threadAmount;
             amount -= tAmount;
             amount /= _threadAmount;
 
             for (int i = 0; i < _threadAmount; i++)
             {
-                Thread gen = new Thread(() => { Output += GenNumbas(min, max, amount, i); });
+                Thread gen = new Thread(() => { Output = GenNumbas(min, max, amount, i); });
                 gen.IsBackground = true;
                 gen.Start();
             }
@@ -102,6 +108,19 @@ namespace LottoGambol
             Thread gen2 = new Thread(() => { Output += GenNumbas(min, max, tAmount, _threadAmount); });
             gen2.IsBackground = true;
             gen2.Start();
+            */
+
+            Thread gen2 = new Thread(() => { Output += GenNumbas(min, max, amount, _threadAmount); });
+            gen2.IsBackground = true;
+            gen2.Start();
+
+            Dispatcher.Invoke(() =>
+            {
+                _popup.Show();
+                _popup.Topmost = true;
+                _popup.WindowState = WindowState.Maximized;
+                _popup.WindowStyle = WindowStyle.None;
+            });
         }
 
         private void Copy_OnClick(object sender, RoutedEventArgs e)
@@ -111,23 +130,46 @@ namespace LottoGambol
 
         private string GenNumbas(int min, int max, int amount, int tNum)
         {
-            _running[tNum] = true;
+            Running[tNum] = true;
             string s = "";
             for (int i = amount; i > 0; i--)
             {
-                if (_running[tNum])
-                    s += _random.Next(min, max + 1) + ",";
+                if (Running[tNum])
+                {
+                    int r = _random.Next(min, max + 1);
+                    s += r + ",";
+                    Dispatcher.Invoke(() =>
+                    {
+                        _popup.LogBlock.Text += r + "\n";
+                    });
+                }
                 else
                 {
-                    _running[tNum] = false;
+                    Running[tNum] = false;
+                    HidePopup();
                     return "";
                 }
             }
 
             //remove last comma
             //s = s.Substring(0, s.Length - 2);
-            _running[tNum] = false;
+            Running[tNum] = false;
+            HidePopup();
             return s;
+        }
+
+        private void HidePopup()
+        {
+            if (!Running.ToList().Contains(true))
+            {
+                _stillRunningThread = false;
+                Dispatcher.Invoke(() => { _popup.Hide(); });
+            }
+        }
+
+        private void MainWindow_OnClosing(object? sender, CancelEventArgs e)
+        {
+            Dispatcher.Invoke(() => { _popup.Close(); });
         }
     }
 }
